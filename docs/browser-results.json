@@ -1,0 +1,24 @@
+{
+  "checks": [
+    "Demo: publicar, curtir, salvar e comentar",
+    "Demo: busca local e atalhos externos sem resultados falsos",
+    "Demo: endereço → coleção privada → publicação com link",
+    "Servidor: cadastro e sessão pela interface",
+    "Servidor: upload de imagem, reencodificação e exibição de post com fonte",
+    "Servidor: curtir e comentar pela interface",
+    "Servidor: coleções persistidas no banco",
+    "Servidor: mensagens privadas entre duas contas",
+    "Servidor: edição de perfil",
+    "Servidor: conteúdo HTML malicioso exibido como texto",
+    "Servidor: sessão e dados preservados em nova instância da interface",
+    "Layout: cinco telas sem rolagem horizontal em 320px",
+    "Layout: cinco telas sem rolagem horizontal em 390px",
+    "Layout: cinco telas sem rolagem horizontal em 768px",
+    "Layout: cinco telas sem rolagem horizontal em 1440px",
+    "JavaScript: nenhuma exceção não tratada nas telas testadas"
+  ],
+  "count": 16,
+  "errors": [],
+  "method": "Chromium real + bridge HTTP; localhost navigation blocked by managed policy",
+  "external_providers": "not live-tested"
+}
