@@ -1,0 +1,19 @@
+services:
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    env_file: .env
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      synapse_internal:
+        ipv4_address: 172.30.42.2
+    depends_on:
+      app:
+        condition: service_healthy
+volumes:
+  caddy_data:
+  caddy_config:

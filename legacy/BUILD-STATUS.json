@@ -1,0 +1,48 @@
+{
+  "version": "0.9.0",
+  "release_scope": "web prelaunch hardening",
+  "built_date": "2026-10-28",
+  "public_deployment_performed": false,
+  "public_url_verified": false,
+  "apk_built": false,
+  "tests": {
+    "automated_passed": 183,
+    "automated_failed": 0,
+    "baseline_v08_passed": 142,
+    "new_tests": 41,
+    "ui_check_groups": 11,
+    "ui_viewport_combinations": 8,
+    "unhandled_js_errors": 0,
+    "method": "Local temporary SQLite/FastAPI. Browser via explicit HTTP bridge; Chromium direct navigation blocked. No production TLS/CSP/cookie verification."
+  },
+  "real_local_tests": [
+    "SQLite and media snapshot",
+    "AES-256-GCM roundtrip and tamper detection",
+    "restore to new directory with old capabilities invalidated",
+    "signature validation using synthetic Ed25519 key",
+    "video processing in inherited regression suite"
+  ],
+  "mocked_services": [
+    "SMTP transport",
+    "Turnstile Siteverify",
+    "age assurance source",
+    "S3 upload result"
+  ],
+  "external_requirements": [
+    "Persistent HTTPS hosting and operator account",
+    "Configured SMTP and real delivery tests",
+    "Turnstile live domain validation",
+    "Qualified age provider and compatible adapter; current adapter contract is project-specific",
+    "Private external backup storage and restore rehearsal",
+    "Reviewed policies and operating team",
+    "Device tests, security and capacity assessment"
+  ],
+  "minor_access_default": false,
+  "parentage_verified": false,
+  "independent_audit": false,
+  "dependency_vulnerability_audit": false,
+  "production_load_test": false,
+  "docker_build_test": false,
+  "architecture": "single process, single instance, SQLite and private local media",
+  "status": "Tested prelaunch code; not a certificate of public readiness."
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "synapse-discovery",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-28",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./web",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "synapse-db",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "synapse-media"
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "*/5 * * * *"
+    ]
+  },
+  "vars": {
+    "APP_ENV": "production",
+    "PUBLIC_ORIGIN": "https://configure.invalid",
+    "OPERATOR_NAME": "",
+    "SUPPORT_EMAIL": "",
+    "CHILD_SAFETY_EMAIL": "",
+    "MAIL_FROM": "",
+    "TURNSTILE_SITE_KEY": "",
+    "AGE_PROVIDER_URL": "",
+    "AGE_PROVIDER_ID": "",
+    "AGE_PUBLIC_KEY": "",
+    "AGE_ENFORCED": "1",
+    "MINOR_ACCOUNTS_ENABLED": "0",
+    "PUBLIC_INDEXING": "0",
+    "GOOGLE_SITE_VERIFICATION": ""
+  },
+  "observability": {
+    "enabled": false
+  },
+  "limits": {
+    "cpu_ms": 30000
+  }
+}
