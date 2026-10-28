@@ -19,7 +19,7 @@
     {
       "binding": "DB",
       "database_name": "synapse-db",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "a8afe93c-20e3-4f1b-8378-b5e80ff8fd5e",
       "migrations_dir": "migrations"
     }
   ],
