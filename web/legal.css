@@ -1,0 +1,2 @@
+body{max-width:820px;margin:auto;padding:40px 22px 70px}header{margin-bottom:30px}header a{font-size:26px;font-weight:800}h1{font-size:32px;margin:18px 0}h2{font-size:20px;margin:28px 0 10px}p{margin:12px 0;line-height:1.8}.notice{background:var(--tint);padding:18px;border-radius:16px;color:var(--accent)}nav{display:flex;flex-wrap:wrap;gap:16px;margin-top:30px}
+.operator-info{border-top:1px solid var(--line);margin-top:30px;padding-top:18px;overflow-wrap:anywhere}

@@ -1,0 +1,31 @@
+services:
+  app:
+    build: .
+    env_file: .env
+    environment:
+      SYNAPSE_DB: /app/data/synapse.db
+      SYNAPSE_MEDIA: /app/data/media
+    volumes:
+      - synapse_data:/app/data
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks:
+      synapse_internal:
+        ipv4_address: 172.30.42.3
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    read_only: true
+    tmpfs:
+      - /tmp:size=256m,mode=1777
+    mem_limit: 1g
+    cpus: 2
+    pids_limit: 256
+volumes:
+  synapse_data:
+networks:
+  synapse_internal:
+    ipam:
+      config:
+        - subnet: 172.30.42.0/24

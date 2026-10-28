@@ -1,0 +1,25 @@
+ATUALIZAÇÃO SUPABASE — SYNAPSESUS
+
+Não substitua o wrangler.jsonc que você já configurou: ele contém seu UUID D1.
+
+1. Extraia este ZIP em outra pasta. Copie src, scripts, migrations, tests, docs,
+   package.json, package-lock.json e .gitignore para sua pasta existente.
+2. No terminal, dentro da pasta existente, execute:
+   npm ci
+   node scripts/configure-supabase.mjs
+3. No Supabase, Authentication: desative Allow new users to sign up.
+   Mantenha o provedor de e-mail e a confirmação ativados.
+4. Copie sua chave sb_secret_ do Supabase e cadastre-a SOMENTE no terminal:
+   npx wrangler secret put SUPABASE_SECRET_KEY --name synapsesus
+   Cole a chave apenas quando o comando pedir. Não envie a chave pelo chat/GitHub.
+5. Execute:
+   npm run deploy
+6. Abra /instalar, crie sua conta, confirme o e-mail e configure o autenticador.
+
+A URL e a chave publicável informadas já estão no atualizador.
+A confirmação e a recuperação por e-mail continuam usando Resend:
+RESEND_API_KEY e MAIL_FROM precisam estar configurados. Não altere a chave
+ADMIN_ENCRYPTION_KEY existente. Preserve SETUP_TOKEN até concluir a instalação.
+
+Leia docs/SUPABASE.md para os detalhes e a opção de publicação pelo GitHub.
+Testes locais concluídos; nenhuma publicação remota foi feita por este pacote.

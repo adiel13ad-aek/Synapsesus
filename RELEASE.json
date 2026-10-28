@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0-rc.1",
+  "target": "Cloudflare Workers + D1 + private R2",
+  "source_baseline": "Synapse Discovery 0.9",
+  "public_deployment_performed": false,
+  "production_integrations_validated": false,
+  "automated_tests_passed": 101,
+  "local_workerd_checks_passed": 16,
+  "browser_layout_combinations": 18,
+  "browser_javascript_errors": 0,
+  "public_registration_default": "closed",
+  "release_notes": "docs/RESULTADOS-1.0.md",
+  "client_patch": "api-validation-1",
+  "browser_checks_passed": 34,
+  "startup_regression_browser_checks": 4,
+  "new_regression_tests_passed": 14,
+  "auth_patch": "supabase-server-credentials-1",
+  "local_supabase_workerd_checks_passed": 17,
+  "supabase_provider_mocked_in_tests": true,
+  "public_supabase_settings_checked": true,
+  "supabase_secret_configured_remotely": false,
+  "auth_guide": "docs/SUPABASE.md"
+}

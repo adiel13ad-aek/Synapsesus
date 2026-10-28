@@ -1,0 +1,73 @@
+name: Gerar APK Android
+on:
+  workflow_dispatch:
+    inputs:
+      app_url:
+        description: 'Origem HTTPS do servidor; vazio = demonstração local'
+        required: false
+        type: string
+      signed_release:
+        description: 'Gerar AAB assinado (exige servidor e quatro secrets de assinatura)'
+        default: false
+        type: boolean
+permissions:
+  contents: read
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Atualizar demo embarcada a partir da interface
+        run: python build_demo.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+      - name: Instalar SDK
+        run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0'
+      - name: Gerar APK e executar lint
+        env:
+          APP_URL: ${{ inputs.app_url }}
+        run: gradle -p android --no-daemon assembleDebug lintDebug "-PAPP_URL=$APP_URL"
+      - name: Assinar AAB para envio manual à loja
+        if: ${{ inputs.signed_release }}
+        env:
+          APP_URL: ${{ inputs.app_url }}
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          SYNAPSE_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          SYNAPSE_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          SYNAPSE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$APP_URL" ] || [ -z "$KEYSTORE_BASE64" ] || [ -z "$SYNAPSE_STORE_PASSWORD" ] || [ -z "$SYNAPSE_KEY_ALIAS" ] || [ -z "$SYNAPSE_KEY_PASSWORD" ]; then
+            echo 'Release exige APP_URL HTTPS e os quatro secrets de assinatura.'
+            exit 1
+          fi
+          export SYNAPSE_KEYSTORE="$RUNNER_TEMP/synapse-upload.jks"
+          trap 'rm -f "$SYNAPSE_KEYSTORE"' EXIT
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$SYNAPSE_KEYSTORE"
+          chmod 600 "$SYNAPSE_KEYSTORE"
+          gradle -p android --no-daemon bundleRelease "-PAPP_URL=$APP_URL"
+      - name: Checksums dos pacotes gerados
+        shell: bash
+        run: |
+          find android/app/build/outputs -type f \( -name '*.apk' -o -name '*.aab' \) -exec sha256sum {} \; > android/app/build/outputs/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Synapse-Android-v0.6
+          path: |
+            android/app/build/outputs/apk/debug/*.apk
+            android/app/build/outputs/bundle/release/*.aab
+            android/app/build/outputs/SHA256SUMS.txt
+            android/app/build/reports/lint-results-debug.html
+          retention-days: 7
+          if-no-files-found: error
