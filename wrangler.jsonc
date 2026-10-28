@@ -36,7 +36,7 @@
   },
   "vars": {
     "APP_ENV": "production",
-    "PUBLIC_ORIGIN": "https://configure.invalid",
+    "PUBLIC_ORIGIN": "https://synapsesus.adielrodriguesdemorais793.workers.dev",
     "OPERATOR_NAME": "",
     "SUPPORT_EMAIL": "",
     "CHILD_SAFETY_EMAIL": "",
